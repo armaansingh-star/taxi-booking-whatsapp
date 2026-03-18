@@ -1,0 +1,113 @@
+{"ts": "2026-03-13T13:30:03.038786", "dir": "user", "msg": "Hi"}
+{"ts": "2026-03-13T13:30:03.040399", "dir": "bot", "msg": "Welcome back, Armaan Manohar! How can I help you today?\n\nYou can send a text or voice message describing your trip, or share a live location for pickup."}
+{"ts": "2026-03-13T13:30:30.776595", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-13T13:30:33.877047", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-13T13:30:43.844814", "dir": "user", "msg": "2:00 pm"}
+{"ts": "2026-03-13T13:30:44.346138", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: University of Warwick\nDropoff: London Heathrow Airport\nDate: 2026-03-14\nTime: 2:00 pm\n\n(Fare could not be calculated for this route)\nJourney: One Way\nTrip Type: Airport\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-13T13:42:17.763257", "dir": "user", "msg": "Hi"}
+{"ts": "2026-03-13T13:42:17.764950", "dir": "bot", "msg": "Welcome back, Armaan Manohar! How can I help you today?\n\nYou can send a text or voice message describing your trip, or share a live location for pickup."}
+{"ts": "2026-03-13T13:42:34.474538", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-13T13:42:37.353323", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-13T13:42:45.014707", "dir": "user", "msg": "2:30 pm"}
+{"ts": "2026-03-13T13:42:45.015211", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-13T13:42:46.053122", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Coventry CV4 7AL, UK\nDropoff: Heathrow Airport (LHR), Hounslow, UK\nDate: 2026-03-14\nTime: 2:30 pm\n\n(Fare could not be calculated for this route)\nTrip Type: Airport\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-13T13:56:08.183341", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-13T13:56:08.184876", "dir": "bot", "msg": "Welcome back, Armaan Manohar! How can I help you today?\n\nYou can send a text or voice message describing your trip, or share a live location for pickup."}
+{"ts": "2026-03-13T13:56:30.423124", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-13T13:56:32.900435", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-13T13:56:41.695365", "dir": "user", "msg": "2:30 pm"}
+{"ts": "2026-03-13T13:56:41.695731", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-13T13:56:51.906478", "dir": "user", "msg": "One way"}
+{"ts": "2026-03-13T13:56:51.906953", "dir": "bot", "msg": "What is your flight number?"}
+{"ts": "2026-03-13T13:57:15.204481", "dir": "user", "msg": "BA0206"}
+{"ts": "2026-03-13T13:57:15.205045", "dir": "bot", "msg": "How many pieces of luggage will you have?"}
+{"ts": "2026-03-13T13:57:20.686362", "dir": "user", "msg": "2"}
+{"ts": "2026-03-13T13:57:20.686750", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-13T13:57:22.620905", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Coventry CV4 7AL, UK\nDropoff: Heathrow Airport (LHR), Hounslow, UK\nDate: 2026-03-14\nTime: 2:30 pm\nDistance: 94.52 miles\nEst. Duration: 99 mins\nFare: \u00a3585.66\nJourney: One way\nTrip Type: Airport\nFlight: BA0206 (Arrival)\nLuggage: 2\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-13T13:57:40.648834", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-13T13:57:40.651544", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2290)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-13T14:14:01.584727", "dir": "user", "msg": "Hi"}
+{"ts": "2026-03-13T14:14:01.586660", "dir": "bot", "msg": "Welcome back, Armaan Manohar! How can I help you today?\n\nYou can send a text or voice message describing your trip, or share a live location for pickup."}
+{"ts": "2026-03-13T14:14:28.617304", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-13T14:14:31.184408", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-13T14:14:38.675420", "dir": "user", "msg": "3:00 pm"}
+{"ts": "2026-03-13T14:14:38.675799", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-13T14:14:45.487455", "dir": "user", "msg": "One Way"}
+{"ts": "2026-03-13T14:14:45.487780", "dir": "bot", "msg": "What is your flight number?"}
+{"ts": "2026-03-13T14:15:09.705622", "dir": "user", "msg": "ABC2087"}
+{"ts": "2026-03-13T14:15:09.706134", "dir": "bot", "msg": "How many pieces of luggage will you have?"}
+{"ts": "2026-03-13T14:15:14.218387", "dir": "user", "msg": "1"}
+{"ts": "2026-03-13T14:15:14.218718", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-13T14:15:17.500723", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: London Gatwick Airport (LGW), Horley, Gatwick RH6 0NP, UK\nDropoff: \u00d6rnsk\u00f6ldsvik, Sweden\nDate: 2026-03-15\nTime: 3:00 pm\nDistance: 1509.52 miles\nEst. Duration: 1634 mins\nFare: \u00a33452.68\nJourney: One Way\nTrip Type: Airport\nFlight: ABC2087 (Arrival)\nLuggage: 1\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-13T14:15:32.034706", "dir": "user", "msg": "No"}
+{"ts": "2026-03-13T14:15:32.034957", "dir": "bot", "msg": "No problem! What would you like to change?\n(pickup / dropoff / date / time / journey)"}
+{"ts": "2026-03-13T14:15:41.592534", "dir": "user", "msg": "Dropoff"}
+{"ts": "2026-03-13T14:15:41.592778", "dir": "bot", "msg": "Where would you like to go?"}
+{"ts": "2026-03-13T14:15:51.647504", "dir": "user", "msg": "University of Warwick"}
+{"ts": "2026-03-13T14:15:51.647786", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-13T14:15:53.758369", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Horley, Gatwick RH6 0NP, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-15\nTime: 3:00 pm\nDistance: 131.71 miles\nEst. Duration: 137 mins\nFare: \u00a3420.00\nJourney: One Way\nTrip Type: Airport\nFlight: ABC2087 (Arrival)\nLuggage: 1\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-13T14:16:08.141484", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-13T14:16:08.144145", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2291)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-13T14:31:05.095097", "dir": "user", "msg": "Hi"}
+{"ts": "2026-03-13T14:31:05.097838", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nYou have an upcoming booking (#2290):\n  Coventry CV4 7AL, UK -> Heathrow Airport (LHR), Hounslow, UK\n  2026-03-14 at 14:30:00\nYou can ask about your driver status anytime.\n\nHow can I help you today?\n\nYou can send a text or voice message describing your trip, or share a live location for pickup."}
+{"ts": "2026-03-13T14:32:12.266887", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-13T14:32:15.462597", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-13T14:32:22.565262", "dir": "user", "msg": "3:00 pm"}
+{"ts": "2026-03-13T14:32:22.565599", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-13T14:32:28.857174", "dir": "user", "msg": "One Way"}
+{"ts": "2026-03-13T14:32:28.857535", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-13T14:32:30.831695", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: 2 Walsall Rd, Perry Barr, Birmingham B42 1AA, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-17\nTime: 3:00 pm\nDistance: 23.41 miles\nEst. Duration: 41 mins\nFare: \u00a3474.76\nJourney: One Way\nTrip Type: Local Trip\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-18T12:02:57.272723", "dir": "user", "msg": "Hi"}
+{"ts": "2026-03-18T12:02:57.275317", "dir": "bot", "msg": "Sorry, something went wrong. Please try again."}
+{"ts": "2026-03-18T12:08:59.260375", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-18T12:08:59.264215", "dir": "bot", "msg": "Sorry, something went wrong. Please try again."}
+{"ts": "2026-03-18T12:16:06.917731", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-18T12:16:06.921822", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nHow can I help you today?\n\nYou can book a new ride via text, voice, or live location."}
+{"ts": "2026-03-18T12:17:31.518194", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-18T12:17:34.929237", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-18T12:17:42.840394", "dir": "user", "msg": "3:00 pm"}
+{"ts": "2026-03-18T12:17:42.840706", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-18T12:17:56.127574", "dir": "user", "msg": "return"}
+{"ts": "2026-03-18T12:17:56.127896", "dir": "bot", "msg": "What is your flight number?"}
+{"ts": "2026-03-18T12:18:07.794351", "dir": "user", "msg": "ABC 1002"}
+{"ts": "2026-03-18T12:18:07.794678", "dir": "bot", "msg": "How many pieces of luggage will you have?"}
+{"ts": "2026-03-18T12:18:12.813658", "dir": "user", "msg": "2"}
+{"ts": "2026-03-18T12:18:12.814069", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-18T12:18:14.783186", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: London Gatwick Airport (LGW), Horley, Gatwick RH6 0NP, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-20\nTime: 3:00 pm\nDistance: 132.35 miles\nEst. Duration: 139 mins\nFare: \u00a3422.91\nJourney: return\nTrip Type: Airport\nFlight: ABC 1002 (Arrival)\nLuggage: 2\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-18T12:18:47.337009", "dir": "user", "msg": "no"}
+{"ts": "2026-03-18T12:18:47.337298", "dir": "bot", "msg": "No problem! What would you like to change?\n(pickup / dropoff / date / time / journey)"}
+{"ts": "2026-03-18T12:18:56.536787", "dir": "user", "msg": "Journey"}
+{"ts": "2026-03-18T12:18:56.537034", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-18T12:19:03.664717", "dir": "user", "msg": "One Way"}
+{"ts": "2026-03-18T12:19:03.665060", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-18T12:19:05.473380", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Horley, Gatwick RH6 0NP, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-20\nTime: 3:00 pm\nDistance: 131.25 miles\nEst. Duration: 135 mins\nFare: \u00a3418.99\nJourney: One Way\nTrip Type: Airport\nFlight: ABC 1002 (Arrival)\nLuggage: 2\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-18T12:19:22.308669", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-18T12:19:22.311380", "dir": "bot", "msg": "Sorry, there was an error saving your booking. Please try again."}
+{"ts": "2026-03-18T12:24:31.070903", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-18T12:24:31.073995", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nHow can I help you today?\n\nYou can book a new ride via text, voice, or live location."}
+{"ts": "2026-03-18T12:24:48.283171", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-18T12:24:50.979133", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-18T12:25:01.488325", "dir": "user", "msg": "3:00 pm"}
+{"ts": "2026-03-18T12:25:01.488708", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-18T12:25:07.458595", "dir": "user", "msg": "One Way"}
+{"ts": "2026-03-18T12:25:07.459013", "dir": "bot", "msg": "What is your flight number?"}
+{"ts": "2026-03-18T12:25:13.988515", "dir": "user", "msg": "ABC 1001"}
+{"ts": "2026-03-18T12:25:13.988966", "dir": "bot", "msg": "How many pieces of luggage will you have?"}
+{"ts": "2026-03-18T12:25:18.794820", "dir": "user", "msg": "2"}
+{"ts": "2026-03-18T12:25:18.795189", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-18T12:25:20.795440", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: London Gatwick Airport (LGW), Horley, Gatwick RH6 0NP, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-19\nTime: 3:00 pm\nDistance: 132.35 miles\nEst. Duration: 139 mins\nFare: \u00a3422.91\nJourney: One Way\nTrip Type: Airport\nFlight: ABC 1001 (Arrival)\nLuggage: 2\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-18T12:25:34.489639", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-18T12:25:34.492576", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2300)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-18T13:06:45.863346", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-18T13:06:45.863590", "dir": "bot", "msg": "Hello Armaan Manohar! Would you like to book another ride?\nSend a text or voice message, or share your live location."}
+{"ts": "2026-03-18T13:07:24.685415", "dir": "user", "msg": "book me taxi day after tomorrow from heathrow airport to university of warwick"}
+{"ts": "2026-03-18T13:07:25.659359", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-18T13:07:33.738392", "dir": "user", "msg": "3"}
+{"ts": "2026-03-18T13:07:33.738737", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-18T13:07:40.855336", "dir": "user", "msg": "One Way"}
+{"ts": "2026-03-18T13:07:40.855644", "dir": "bot", "msg": "What is your flight number?"}
+{"ts": "2026-03-18T13:07:48.063091", "dir": "user", "msg": "abc 1001"}
+{"ts": "2026-03-18T13:07:48.063493", "dir": "bot", "msg": "How many pieces of luggage will you have?"}
+{"ts": "2026-03-18T13:07:52.824528", "dir": "user", "msg": "1"}
+{"ts": "2026-03-18T13:07:52.824952", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-18T13:07:55.111327", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Heathrow Airport (LHR), Hounslow, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-20\nTime: 3\nDistance: 97.33 miles\nEst. Duration: 108 mins\nFare: \u00a3399.70\nJourney: One Way\nTrip Type: Airport\nFlight: abc 1001 (Arrival)\nLuggage: 1\n\nReply YES to confirm or NO to make changes."}
