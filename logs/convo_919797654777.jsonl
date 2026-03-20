@@ -111,3 +111,109 @@
 {"ts": "2026-03-18T13:07:52.824528", "dir": "user", "msg": "1"}
 {"ts": "2026-03-18T13:07:52.824952", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
 {"ts": "2026-03-18T13:07:55.111327", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Heathrow Airport (LHR), Hounslow, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-20\nTime: 3\nDistance: 97.33 miles\nEst. Duration: 108 mins\nFare: \u00a3399.70\nJourney: One Way\nTrip Type: Airport\nFlight: abc 1001 (Arrival)\nLuggage: 1\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-19T01:40:30.962650", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-19T01:40:30.964442", "dir": "bot", "msg": "Welcome to our taxi booking service! I don't have your details on file.\n\nMay I have your full name please?"}
+{"ts": "2026-03-19T01:40:31.774129", "dir": "bot", "msg": "Sorry, something went wrong. Please try again."}
+{"ts": "2026-03-19T01:43:06.643355", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-19T01:43:06.645066", "dir": "bot", "msg": "Welcome to our taxi booking service! I don't have your details on file.\n\nMay I have your full name please?"}
+{"ts": "2026-03-19T01:45:08.295344", "dir": "user", "msg": "Armaan Manohar"}
+{"ts": "2026-03-19T01:45:08.295648", "dir": "bot", "msg": "Thanks, Armaan Manohar! What is your email address?"}
+{"ts": "2026-03-19T01:45:09.362133", "dir": "bot", "msg": "Sorry, something went wrong. Please try again."}
+{"ts": "2026-03-19T01:48:39.689938", "dir": "user", "msg": "Hi"}
+{"ts": "2026-03-19T01:48:39.691444", "dir": "bot", "msg": "Welcome to our taxi booking service! I don't have your details on file.\n\nMay I have your full name please?"}
+{"ts": "2026-03-19T01:48:40.802701", "dir": "bot", "msg": "Sorry, something went wrong. Please try again."}
+{"ts": "2026-03-19T01:54:23.116044", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-19T01:54:23.117437", "dir": "bot", "msg": "Welcome to our taxi booking service! I don't have your details on file.\n\nMay I have your full name please?"}
+{"ts": "2026-03-20T06:35:02.982308", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-20T06:35:02.984132", "dir": "bot", "msg": "Welcome to our taxi booking service! I don't have your details on file.\n\nMay I have your full name please?"}
+{"ts": "2026-03-20T07:56:51.722340", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-20T07:56:51.724550", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nHow can I help you today?\n\nYou can book a new ride via text, voice, or live location."}
+{"ts": "2026-03-20T07:57:35.385669", "dir": "user", "msg": "book me a taxi from the shard london to london bridge tomorrow"}
+{"ts": "2026-03-20T07:57:36.438010", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-20T07:57:43.621220", "dir": "user", "msg": "3:00 pm"}
+{"ts": "2026-03-20T07:57:43.621556", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-20T07:57:49.996814", "dir": "user", "msg": "One Way"}
+{"ts": "2026-03-20T07:57:49.997161", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-20T07:57:52.270218", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: 32 London Bridge St, London SE1 9SG, UK\nDropoff: London Bridge, London EC4R 3TN, UK\nDate: 2026-03-21\nTime: 3:00 pm\nDistance: 0.27 miles\nEst. Duration: 2 mins\nFare: \u00a3140.49\nJourney: One Way\nTrip Type: Local Trip\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-20T07:58:22.803497", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-20T07:58:22.806247", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2310)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-20T08:34:10.565595", "dir": "user", "msg": "Hi"}
+{"ts": "2026-03-20T08:34:10.565858", "dir": "bot", "msg": "Hello Armaan Manohar! Would you like to book another ride?\nSend a text or voice message, or share your live location."}
+{"ts": "2026-03-20T08:34:29.342530", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-20T08:34:30.087633", "dir": "bot", "msg": "Where should I pick you up from?"}
+{"ts": "2026-03-20T08:35:52.472267", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-20T08:35:54.822802", "dir": "bot", "msg": "Where would you like to go?"}
+{"ts": "2026-03-20T08:36:08.654532", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-20T08:36:11.283677", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-20T08:36:20.877007", "dir": "user", "msg": "3"}
+{"ts": "2026-03-20T08:36:20.877295", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-20T08:36:30.166611", "dir": "user", "msg": "One way"}
+{"ts": "2026-03-20T08:36:30.166905", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-20T08:36:32.186876", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: London Bridge, London EC4R 3TN, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-21\nTime: 3\nDistance: 110.82 miles\nEst. Duration: 148 mins\nFare: \u00a3385.66\nJourney: One way\nTrip Type: Local Trip\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-20T08:36:47.717993", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-20T08:36:47.720748", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2311)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-20T08:37:56.543496", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-20T08:37:57.288569", "dir": "bot", "msg": "Where should I pick you up from?"}
+{"ts": "2026-03-20T08:38:14.086179", "dir": "user", "msg": "[Voice/Media message]"}
+{"ts": "2026-03-20T08:38:16.117031", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-20T08:38:27.111707", "dir": "user", "msg": "4 pm"}
+{"ts": "2026-03-20T08:38:27.112006", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-20T08:38:42.325621", "dir": "user", "msg": "Round trip"}
+{"ts": "2026-03-20T08:38:42.326164", "dir": "bot", "msg": "How long (in minutes) would you like the driver to wait?"}
+{"ts": "2026-03-20T08:38:50.268679", "dir": "user", "msg": "30 mins"}
+{"ts": "2026-03-20T08:38:50.269148", "dir": "bot", "msg": "Please enter a number."}
+{"ts": "2026-03-20T08:38:56.550135", "dir": "user", "msg": "30"}
+{"ts": "2026-03-20T08:38:56.550431", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-20T08:38:58.418155", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: London Bridge, London EC4R 3TN, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-21\nTime: 4 pm\nDistance: 110.82 miles\nEst. Duration: 148 mins\nFare: \u00a3390.66\n  (includes \u00a35.00 wait surcharge)\nJourney: Round trip\nTrip Type: Local Trip\nWait Time: 30 mins\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-20T08:39:55.431014", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-20T08:39:55.433786", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2312)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-20T10:36:22.049313", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-20T10:36:22.052003", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nYour upcoming bookings:\n  #2311: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 00:00:00\n  #2310: 32 London Bridge St, London SE1 9SG, UK -> London Bridge, London EC4R 3TN, UK\n    2026-03-21 at 15:00:00\n  #2312: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 16:00:00\n\nYou can ask about driver status, or reply with a booking number to make changes (e.g. \"edit #2290\").\n\nHow can I help you today?\n\nYou can book a new ride via text, voice, or live location."}
+{"ts": "2026-03-20T10:36:59.055660", "dir": "user", "msg": "give me the driver status"}
+{"ts": "2026-03-20T10:36:59.350675", "dir": "bot", "msg": "Where should I pick you up from?"}
+{"ts": "2026-03-20T10:37:56.662036", "dir": "user", "msg": "edit $2290"}
+{"ts": "2026-03-20T10:37:56.697901", "dir": "bot", "msg": "Where should I pick you up from?"}
+{"ts": "2026-03-20T10:38:03.403084", "dir": "user", "msg": "edit #2290"}
+{"ts": "2026-03-20T10:38:03.437612", "dir": "bot", "msg": "Where should I pick you up from?"}
+{"ts": "2026-03-20T10:47:36.514354", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-20T10:47:36.517116", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nYour upcoming bookings:\n  #2311: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 00:00:00\n  #2310: 32 London Bridge St, London SE1 9SG, UK -> London Bridge, London EC4R 3TN, UK\n    2026-03-21 at 15:00:00\n  #2312: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 16:00:00\n\nYou can ask about driver status, or reply with a booking number to make changes (e.g. \"edit #2290\").\n\nHow can I help you today?\n\nYou can book a new ride via text, voice, or live location."}
+{"ts": "2026-03-20T10:47:53.233820", "dir": "user", "msg": "driver status for #2300?"}
+{"ts": "2026-03-20T10:47:53.656309", "dir": "bot", "msg": "Here is the latest status for your active bookings:\n\nBooking #2311: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\nDate/Time: 2026-03-21 at 00:00:00\nStatus: Awaiting driver assignment\nETA: ETA unavailable\nVehicle: Not assigned yet\n\nBooking #2310: 32 London Bridge St, London SE1 9SG, UK -> London Bridge, London EC4R 3TN, UK\nDate/Time: 2026-03-21 at 15:00:00\nStatus: Awaiting driver assignment\nETA: ETA unavailable\nVehicle: Not assigned yet\n\nBooking #2312: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\nDate/Time: 2026-03-21 at 16:00:00\nStatus: Awaiting driver assignment\nETA: ETA unavailable\nVehicle: Not assigned yet"}
+{"ts": "2026-03-20T10:48:51.777597", "dir": "user", "msg": "edit #2312"}
+{"ts": "2026-03-20T10:48:51.966361", "dir": "bot", "msg": "I see you want to edit booking #2312.\nOur automated editing feature is still under construction, but a human agent will review this shortly."}
+{"ts": "2026-03-20T11:09:16.632164", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-20T11:09:16.635008", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nYour upcoming bookings:\n  #2311: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 00:00:00\n  #2310: 32 London Bridge St, London SE1 9SG, UK -> London Bridge, London EC4R 3TN, UK\n    2026-03-21 at 15:00:00\n  #2312: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 16:00:00\n\nYou can ask about driver status, or reply with a booking number to make changes (e.g. \"edit #2290\").\n\nHow can I help you today?\n\nYou can book a new ride via text, voice, or live location."}
+{"ts": "2026-03-20T11:09:35.837661", "dir": "user", "msg": "driver status for #2300?"}
+{"ts": "2026-03-20T11:09:36.254011", "dir": "bot", "msg": "Booking #2300: London Gatwick Airport (LGW), Horley, Gatwick RH6 0NP, UK -> Coventry CV4 7AL, UK\nDate/Time: 2026-03-19 at 15:00:00\nStatus: Ongoing\nETA: ETA unavailable\nVehicle: White Skoda Superb Skoda Superb (P151)\nDriver: Allen Dent\nDriver Phone: 01000 000008"}
+{"ts": "2026-03-20T11:10:42.548593", "dir": "user", "msg": "edit #2312"}
+{"ts": "2026-03-20T11:10:42.738677", "dir": "bot", "msg": "I see you want to edit booking #2312.\nWhat would you like to change? You can reply naturally, for example: change pickup to Oxford and time to 3:30 PM."}
+{"ts": "2026-03-20T11:11:06.774796", "dir": "user", "msg": "change the time to 6 pm"}
+{"ts": "2026-03-20T11:11:06.896576", "dir": "bot", "msg": "Booking #2312 has been updated.\nPickup: London Bridge, London EC4R 3TN, UK\nDropoff: Coventry CV4 7AL, UK\nDate: 2026-03-21\nTime: 6 pm"}
+{"ts": "2026-03-20T11:12:33.628230", "dir": "user", "msg": "book me a ride for day after tomorrow from University of warwick to The Shard london"}
+{"ts": "2026-03-20T11:12:34.385360", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-20T11:12:46.117456", "dir": "user", "msg": "2 pm"}
+{"ts": "2026-03-20T11:12:46.117879", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-20T11:12:55.618763", "dir": "user", "msg": "Round trip"}
+{"ts": "2026-03-20T11:12:55.619105", "dir": "bot", "msg": "How long (in minutes) would you like the driver to wait?"}
+{"ts": "2026-03-20T11:13:01.410817", "dir": "user", "msg": "30"}
+{"ts": "2026-03-20T11:13:01.411136", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-20T11:13:03.375022", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Coventry CV4 7AL, UK\nDropoff: 32 London Bridge St, London SE1 9SG, UK\nDate: 2026-03-22\nTime: 2 pm\nDistance: 109.27 miles\nEst. Duration: 147 mins\nFare: \u00a31228.02\n  (includes \u00a35.00 wait surcharge)\nJourney: Round Trip\nTrip Type: Local Trip\nWait Time: 30 mins\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-20T11:13:40.862469", "dir": "user", "msg": "Yes"}
+{"ts": "2026-03-20T11:13:40.864870", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2313)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-20T11:14:09.523137", "dir": "user", "msg": "book me another ride from uni of warwick to shard london tomorrow"}
+{"ts": "2026-03-20T11:14:10.281012", "dir": "bot", "msg": "What time would you like to be picked up?"}
+{"ts": "2026-03-20T11:14:15.560518", "dir": "user", "msg": "1 pm"}
+{"ts": "2026-03-20T11:14:15.560827", "dir": "bot", "msg": "Is this a One Way, Return, or Round Trip?"}
+{"ts": "2026-03-20T11:14:24.310614", "dir": "user", "msg": "one way"}
+{"ts": "2026-03-20T11:14:24.311025", "dir": "bot", "msg": "Let me validate your locations and calculate the fare..."}
+{"ts": "2026-03-20T11:14:26.180063", "dir": "bot", "msg": "Here's your booking summary:\n\nPickup: Coventry CV4 7AL, UK\nDropoff: 32 London Bridge St, London SE1 9SG, UK\nDate: 2026-03-21\nTime: 1 pm\nDistance: 109.27 miles\nEst. Duration: 147 mins\nFare: \u00a3618.11\nJourney: One Way\nTrip Type: Local Trip\n\nReply YES to confirm or NO to make changes."}
+{"ts": "2026-03-20T11:14:42.251401", "dir": "user", "msg": "yes"}
+{"ts": "2026-03-20T11:14:42.253327", "dir": "bot", "msg": "Your booking is confirmed! (Booking #2314)\n\nYou'll receive a notification once a driver is assigned.\nYou can ask me about your driver anytime, or book another ride."}
+{"ts": "2026-03-20T11:14:48.114639", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-20T11:14:48.114856", "dir": "bot", "msg": "Hello Armaan Manohar! Would you like to book another ride?\nSend a text or voice message, or share your live location."}
+{"ts": "2026-03-20T11:15:01.235489", "dir": "user", "msg": "no thanks, bye"}
+{"ts": "2026-03-20T11:15:01.269916", "dir": "bot", "msg": "Where should I pick you up from?"}
+{"ts": "2026-03-20T11:21:02.136814", "dir": "user", "msg": "hi"}
+{"ts": "2026-03-20T11:21:02.139192", "dir": "bot", "msg": "Welcome back, Armaan Manohar!\nYour upcoming bookings:\n  #2311: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 00:00:00\n  #2314: Coventry CV4 7AL, UK -> 32 London Bridge St, London SE1 9SG, UK\n    2026-03-21 at 13:00:00\n  #2310: 32 London Bridge St, London SE1 9SG, UK -> London Bridge, London EC4R 3TN, UK\n    2026-03-21 at 15:00:00\n  #2312: London Bridge, London EC4R 3TN, UK -> Coventry CV4 7AL, UK\n    2026-03-21 at 18:00:00\n  #2313: Coventry CV4 7AL, UK -> 32 London Bridge St, London SE1 9SG, UK\n    2026-03-22 at 14:00:00\n\nYou can ask about driver status, or reply with a booking number to make changes (e.g. \"edit #2290\").\n\nHow can I help you today?\n\nYou can book a new ride via text, voice, or live location."}
+{"ts": "2026-03-20T11:21:10.988054", "dir": "user", "msg": "no thanks, bye"}
+{"ts": "2026-03-20T11:21:11.379015", "dir": "bot", "msg": "You're welcome! Let me know if you need a ride later."}

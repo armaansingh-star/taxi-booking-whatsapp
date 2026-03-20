@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import re
 from datetime import datetime, timedelta
 
 import pytz
@@ -172,7 +173,6 @@ async def _handle_identify(
 
     session.customer_id = customer.customer_id
     session.customer_name = customer.full_name
-    session.state = ConversationState.COLLECTING
 
     # Check for upcoming bookings
     upcoming = await booking_service.get_upcoming_bookings(customer.customer_id)
@@ -198,14 +198,31 @@ async def _handle_identify(
     )
 
     if has_content:
-        # Greet briefly and immediately process the booking content
-        greeting = f"Welcome back, {customer.full_name}!"
-        if bookings_info:
-            greeting += bookings_info + "\nProcessing your new request..."
-        await _send(from_number, greeting)
-        # Process the message as COLLECTING (don't make user repeat)
-        await _handle_collecting(
-            session, from_number, body, num_media, data, latitude, longitude
+        if latitude and longitude or num_media > 0:
+            await _start_new_booking_from_identify(
+                session, from_number, customer.full_name, bookings_info, body, num_media, data, latitude, longitude
+            )
+            return
+
+        route = await llm_service.classify_intent(body)
+        intent = route.get("intent")
+        booking_id = route.get("booking_id")
+
+        if intent == "CHECK_STATUS":
+            await _handle_identify_status(session, from_number, bookings_info, booking_id)
+            return
+
+        if intent == "EDIT_BOOKING":
+            await _handle_identify_edit(session, from_number, booking_id)
+            return
+
+        if intent == "GENERAL_CHAT":
+            reply = await llm_service.generate_conversational_reply(body)
+            await _send(from_number, reply)
+            return
+
+        await _start_new_booking_from_identify(
+            session, from_number, customer.full_name, bookings_info, body, num_media, data, latitude, longitude
         )
     else:
         # Just a greeting - show full welcome with options
@@ -217,6 +234,149 @@ async def _handle_identify(
             "You can book a new ride via text, voice, or live location."
         )
         await _send(from_number, greeting)
+
+
+async def _start_new_booking_from_identify(
+    session: ConversationSession,
+    from_number: str,
+    customer_name: str,
+    bookings_info: str,
+    body: str,
+    num_media: int,
+    data: dict,
+    latitude: str | None,
+    longitude: str | None,
+):
+    session.state = ConversationState.COLLECTING
+    greeting = f"Welcome back, {customer_name}!"
+    if bookings_info:
+        greeting += bookings_info + "\nProcessing your new request..."
+    await _send(from_number, greeting)
+    await _handle_collecting(
+        session, from_number, body, num_media, data, latitude, longitude
+    )
+
+
+async def _handle_identify_status(
+    session: ConversationSession, from_number: str, bookings_info: str, booking_id: int | None = None
+):
+    if not session.customer_id:
+        await _send(from_number, "I couldn't find your customer profile yet.")
+        return
+
+    if booking_id is not None:
+        item = await booking_service.get_booking_status_for_customer(session.customer_id, booking_id)
+        if not item:
+            await _send(from_number, f"I couldn't find booking #{booking_id} on your account.")
+            return
+        session.last_booking_id = booking_id
+        await _send(from_number, _format_status_message(item))
+        return
+
+    statuses = await booking_service.get_active_booking_statuses(session.customer_id)
+    if not statuses:
+        message = "I couldn't find any active upcoming bookings for you."
+        if bookings_info:
+            message += bookings_info
+        await _send(from_number, message)
+        return
+
+    session.last_booking_id = statuses[0]["booking_id"]
+    lines = ["Here is the latest status for your active bookings:\n"]
+    for item in statuses:
+        lines.append(_format_status_message(item))
+        lines.append("")
+    await _send(from_number, "\n".join(lines).strip())
+
+
+async def _handle_identify_edit(
+    session: ConversationSession, from_number: str, booking_id: int | None
+):
+    if not session.customer_id:
+        await _send(from_number, "I couldn't find your customer profile yet.")
+        return
+
+    if booking_id is None:
+        await _send(
+            from_number,
+            "I can help route an edit request, but I need the booking number. Please reply with something like edit #2290.",
+        )
+        return
+
+    booking = await booking_service.get_customer_booking(session.customer_id, booking_id)
+    if not booking:
+        await _send(from_number, f"I couldn't find booking #{booking_id} on your account.")
+        return
+
+    if await booking_service.has_assignment(booking_id):
+        await _send(
+            from_number,
+            f"Booking #{booking_id} already has a driver assigned, so I can't edit it automatically. Please contact support for assistance.",
+        )
+        return
+
+    session.last_booking_id = booking_id
+    session.editing_booking_id = booking_id
+    session.booking = _booking_row_to_extraction(booking)
+    session.state = ConversationState.EDITING
+    await _send(
+        from_number,
+        f"I see you want to edit booking #{booking_id}.\n"
+        "What would you like to change? You can reply naturally, for example: change pickup to Oxford and time to 3:30 PM.",
+    )
+
+
+def _format_vehicle(item: dict) -> str:
+    parts = [item.get("color"), item.get("make"), item.get("model")]
+    vehicle = " ".join(part for part in parts if part)
+    plate = item.get("plate_number")
+    if vehicle and plate:
+        return f"{vehicle} ({plate})"
+    if vehicle:
+        return vehicle
+    if plate:
+        return plate
+    return "Not assigned yet"
+
+
+def _format_status_message(item: dict) -> str:
+    ride_status = item.get("ride_status") or "Awaiting driver assignment"
+    eta = "ETA unavailable"
+    lines = [
+        f"Booking #{item['booking_id']}: {item['pickup_location']} -> {item['dropoff_location']}",
+        f"Date/Time: {item['pickup_date']} at {item['pickup_time']}",
+        f"Status: {ride_status}",
+        f"ETA: {eta}",
+        f"Vehicle: {_format_vehicle(item)}",
+    ]
+    if item.get("driver_name"):
+        lines.append(f"Driver: {item['driver_name']}")
+        lines.append(f"Driver Phone: {item.get('driver_phone') or 'phone unavailable'}")
+    return "\n".join(lines)
+
+
+def _booking_row_to_extraction(row: dict) -> BookingExtraction:
+    passengers = None
+    notes = row.get("booking_notes") or ""
+    match = re.search(r"Passengers:\s*(\d+)", notes, re.IGNORECASE)
+    if match:
+        passengers = int(match.group(1))
+
+    pickup_date = row.get("pickup_date")
+    pickup_time = row.get("pickup_time")
+    return BookingExtraction(
+        journey_type=row.get("journey_type"),
+        pickup_location=row.get("pickup_location"),
+        dropoff_location=row.get("dropoff_location"),
+        pickup_date=pickup_date.isoformat() if pickup_date else None,
+        pickup_time=pickup_time.strftime("%H:%M") if pickup_time else None,
+        trip_type=row.get("dropoff_location_type"),
+        flight_number=row.get("flight_number"),
+        flight_journey_type=row.get("flight_journey_type"),
+        wait_time_mins=row.get("wait_time_mins"),
+        number_of_luggages=row.get("number_of_luggages"),
+        passengers=passengers,
+    )
 
 
 async def _handle_onboard_name(
@@ -329,8 +489,8 @@ async def _handle_collecting(
     # Voice message
     if num_media > 0:
         media_type = data.get("MediaContentType0", "")
-        if "audio" in media_type:
-            media_url = data.get("MediaUrl0", "")
+        media_url = data.get("MediaUrl0", "")
+        if media_url and (not media_type or "audio" in media_type or "ogg" in media_type):
             try:
                 audio_path = await transcription_service.download_media(media_url)
                 text = await transcription_service.transcribe_audio(audio_path)
@@ -357,9 +517,16 @@ async def _handle_collecting(
                     await _send(from_number, "Please enter a number.")
                     return
             else:
-                setattr(session.booking, next_field, body.strip())
+                cleaned = _sanitize_field_value(next_field, body.strip())
+                if cleaned is None and next_field == "journey_type":
+                    await _send(from_number, "Please reply with One Way, Return, or Round Trip.")
+                    return
+                if cleaned is None and next_field == "pickup_time":
+                    await _send(from_number, "Did you mean 3:00 AM or 3:00 PM? Please include a time like 3:00 PM.")
+                    return
+                setattr(session.booking, next_field, cleaned)
 
-            log.info("Direct assign: %s = %s", next_field, body.strip())
+            log.info("Direct assign: %s = %s", next_field, getattr(session.booking, next_field))
 
             # After setting journey_type, auto-derive dependent fields
             if next_field == "journey_type":
@@ -370,8 +537,12 @@ async def _handle_collecting(
 
         # If only one core field is missing, assign directly
         if next_field and next_field in CORE_FIELDS and _count_missing_core(session.booking) == 1:
-            setattr(session.booking, next_field, body)
-            log.info("Direct assign (last core): %s = %s", next_field, body)
+            cleaned = _sanitize_field_value(next_field, body.strip())
+            if cleaned is None and next_field == "pickup_time":
+                await _send(from_number, "Did you mean 3:00 AM or 3:00 PM? Please include a time like 3:00 PM.")
+                return
+            setattr(session.booking, next_field, cleaned)
+            log.info("Direct assign (last core): %s = %s", next_field, cleaned)
             await _ask_next_or_proceed(session, from_number)
             return
 
@@ -401,6 +572,7 @@ async def _extract_and_merge(
         augmented = text
 
     extraction = await llm_service.extract_booking(augmented)
+    _sanitize_extraction(extraction)
     _merge(session.booking, extraction)
 
     # Auto-set trip metadata after LLM extraction
@@ -440,6 +612,47 @@ def _auto_set_trip_metadata(booking: BookingExtraction):
     if booking.journey_type and booking.journey_type.lower() != "round trip":
         if booking.wait_time_mins is None:
             booking.wait_time_mins = 0
+
+
+def _sanitize_extraction(extraction: BookingExtraction):
+    extraction.journey_type = _sanitize_journey_type(extraction.journey_type)
+    extraction.pickup_time = _sanitize_time_value(extraction.pickup_time)
+
+
+def _sanitize_field_value(field: str, value: str):
+    if field == "journey_type":
+        return _sanitize_journey_type(value)
+    if field == "pickup_time":
+        return _sanitize_time_value(value)
+    return value
+
+
+def _sanitize_journey_type(value: str | None) -> str | None:
+    if not value:
+        return None
+
+    normalized = value.strip().replace("_", " ").replace("-", " ")
+    normalized = re.sub(r"\s+", " ", normalized).title()
+    mapping = {
+        "One Way": "One Way",
+        "Oneway": "One Way",
+        "Return": "Return",
+        "Round Trip": "Round Trip",
+        "Roundtrip": "Round Trip",
+    }
+    return mapping.get(normalized)
+
+
+def _sanitize_time_value(value: str | None) -> str | None:
+    if not value:
+        return None
+
+    stripped = value.strip()
+    has_colon = ":" in stripped
+    has_ampm = bool(re.search(r"\b(?:am|pm)\b", stripped, re.IGNORECASE))
+    if not has_colon and not has_ampm:
+        return None
+    return stripped
 
 
 async def _ask_next_or_proceed(
@@ -583,6 +796,7 @@ async def _calculate_and_format_fare(
         pickup_for_fare,
         dropoff_for_fare,
         b.wait_time_mins or 0,
+        b.journey_type,
     )
     if fare is None:
         return None
@@ -644,6 +858,7 @@ async def _handle_confirmation(
             )
 
     elif lower == "no":
+        session.editing_booking_id = None
         session.state = ConversationState.EDITING
         await _send(
             from_number,
@@ -722,6 +937,10 @@ EDIT_FIELD_MAP = {
 async def _handle_editing(
     session: ConversationSession, from_number: str, body: str
 ):
+    if session.editing_booking_id:
+        await _handle_existing_booking_edit(session, from_number, body)
+        return
+
     field_key = body.lower().strip()
     mapped = EDIT_FIELD_MAP.get(field_key)
 
@@ -736,6 +955,92 @@ async def _handle_editing(
             "Please choose one of these to change:\n"
             "pickup / dropoff / date / time / journey",
         )
+
+
+async def _handle_existing_booking_edit(
+    session: ConversationSession, from_number: str, body: str
+):
+    booking_id = session.editing_booking_id
+    if not booking_id:
+        await _send(from_number, "I couldn't determine which booking you want to edit.")
+        return
+
+    if await booking_service.has_assignment(booking_id):
+        session.editing_booking_id = None
+        session.state = ConversationState.IDENTIFY
+        await _send(
+            from_number,
+            f"Booking #{booking_id} has now been assigned to a driver, so automatic edits are blocked. Please contact support for assistance.",
+        )
+        return
+
+    extraction = await llm_service.extract_booking(body)
+    _sanitize_extraction(extraction)
+    if not _has_updates(extraction):
+        await _send(
+            from_number,
+            "I couldn't detect the changes yet. Please describe the new pickup, dropoff, date, time, or journey type.",
+        )
+        return
+
+    _apply_booking_updates(session.booking, extraction)
+    _auto_set_trip_metadata(session.booking)
+
+    resolved_date = _normalize_date(session.booking.pickup_date or "")
+    resolved_time = _normalize_time(session.booking.pickup_time or "")
+    if not resolved_date or not resolved_time:
+        await _send(
+            from_number,
+            "I still need a clear date and time before I can update this booking. Please include both, for example tomorrow at 3:30 PM.",
+        )
+        return
+
+    notes = f"Passengers: {session.booking.passengers}" if session.booking.passengers else None
+    phone = customer_service.normalize_phone(from_number)
+    updated_id = await booking_service.update_booking(
+        booking_id,
+        phone,
+        pickup_date=resolved_date,
+        pickup_time=resolved_time,
+        pickup_location=session.booking.pickup_location or "",
+        dropoff_location=session.booking.dropoff_location or "",
+        dropoff_location_type=session.booking.trip_type,
+        booking_notes=notes,
+        wait_time_mins=session.booking.wait_time_mins,
+        journey_type=session.booking.journey_type,
+        flight_number=session.booking.flight_number,
+        flight_journey_type=session.booking.flight_journey_type,
+        number_of_luggages=session.booking.number_of_luggages,
+    )
+    if not updated_id:
+        await _send(
+            from_number,
+            f"I couldn't update booking #{booking_id}. Please try again or contact support.",
+        )
+        return
+
+    session.last_booking_id = updated_id
+    session.editing_booking_id = None
+    session.state = ConversationState.POST_BOOKING
+    await _send(
+        from_number,
+        f"Booking #{updated_id} has been updated.\n"
+        f"Pickup: {session.booking.pickup_location}\n"
+        f"Dropoff: {session.booking.dropoff_location}\n"
+        f"Date: {session.booking.pickup_date}\n"
+        f"Time: {session.booking.pickup_time}",
+    )
+
+
+def _has_updates(extraction: BookingExtraction) -> bool:
+    return any(getattr(extraction, field) is not None for field in extraction.model_fields)
+
+
+def _apply_booking_updates(existing: BookingExtraction, updates: BookingExtraction):
+    for field in existing.model_fields:
+        new_value = getattr(updates, field)
+        if new_value is not None:
+            setattr(existing, field, new_value)
 
 
 # ──────────────────────── Phase F: Post-Booking ────────────────────────

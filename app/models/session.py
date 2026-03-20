@@ -30,6 +30,7 @@ class ConversationSession(BaseModel):
     pickup_coords: str | None = None   # "lat,lng" after geocoding
     dropoff_coords: str | None = None  # "lat,lng" after geocoding
     last_booking_id: int | None = None
+    editing_booking_id: int | None = None
     # Timestamps
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
@@ -42,4 +43,5 @@ class ConversationSession(BaseModel):
         self.fare = None
         self.pickup_coords = None
         self.dropoff_coords = None
+        self.editing_booking_id = None
         self.state = ConversationState.COLLECTING

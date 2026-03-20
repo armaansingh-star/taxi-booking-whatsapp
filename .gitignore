@@ -130,6 +130,8 @@ clever-scribbling-wall.md
 
 
 # Environments
+whatsapp_bot.py
+verify.py
 .env
 .venv
 env/

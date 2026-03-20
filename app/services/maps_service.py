@@ -115,7 +115,7 @@ async def get_distance(origin: str, destination: str) -> tuple[float, int] | Non
 
 
 async def calculate_fare(
-    pickup: str, dropoff: str, wait_time_mins: int = 0
+    pickup: str, dropoff: str, wait_time_mins: int = 0, journey_type: str | None = None
 ) -> FareEstimate | None:
     """Calculate fare for route Base(A) -> Pickup(B) -> Dropoff(C).
 
@@ -146,7 +146,10 @@ async def calculate_fare(
     dest_to_base_mins = ca[1] if ca else 0
 
     total_miles = base_to_src_miles + ride_miles
-    base_fare = max(((total_miles - 2) * 2.2) + 11, 11.0)
+    if journey_type == "Round Trip":
+        base_fare = total_miles * 2.2 * 2
+    else:
+        base_fare = max(((total_miles - 2) * 2.2) + 11, 11.0)
     wait_surcharge = (wait_time_mins // 30) * 5.0
 
     return FareEstimate(

@@ -35,8 +35,8 @@ async def create_customer(data: CustomerCreate) -> int:
     customer_id = await pool.fetchval(
         """
         INSERT INTO ingest_db.customers
-            (full_name, primary_phone_no, email, address, town, postal_code, is_corporate)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+            (full_name, primary_phone_no, email, address, town, postal_code, is_corporate, status)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, 'Active')
         RETURNING customer_id
         """,
         data.full_name,
