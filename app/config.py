@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     TWILIO_ACCOUNT_SID: str
     TWILIO_AUTH_TOKEN: str
     TWILIO_WHATSAPP_NUMBER: str
+    API_SECRET_KEY: str
 
     # Google Maps
     GOOGLE_MAPS_API_KEY: str

@@ -80,6 +80,25 @@ async def get_assignment_details(booking_id: int) -> dict | None:
     return None
 
 
+async def cancel_assigned_ride(booking_id: int) -> dict | None:
+    """Cancel an assigned ride and return the assigned driver's phone."""
+    pool = get_pool()
+    row = await pool.fetchrow(
+        """
+        UPDATE transform_db.booking_assignments ba
+        SET ride_status = 'Cancelled'
+        FROM ingest_db.drivers d
+        WHERE ba.booking_id = $1
+          AND d.driver_id = ba.driver_id
+        RETURNING d.phone AS driver_phone
+        """,
+        booking_id,
+    )
+    if row:
+        return dict(row)
+    return None
+
+
 async def has_assignment(booking_id: int) -> bool:
     """Return True if a booking already has an assignment row."""
     pool = get_pool()
@@ -188,41 +207,78 @@ async def get_customer_booking(customer_id: int, booking_id: int) -> dict | None
     return None
 
 
-async def get_booking_status_for_customer(customer_id: int, booking_id: int) -> dict | None:
-    """Get booking + latest assignment details for a specific customer booking."""
+async def get_booking_status_for_customer(customer_id: int, booking_id: int | None = None) -> dict | None:
+    """Get booking + latest assignment details for a specific customer booking.
+
+    If booking_id is omitted, default to the most recent upcoming booking.
+    """
     pool = get_pool()
-    row = await pool.fetchrow(
-        """
-        SELECT
-            b.booking_id,
-            b.pickup_date,
-            b.pickup_time,
-            b.pickup_location,
-            b.dropoff_location,
-            ba.ride_status,
-            d.driver_name,
-            d.phone AS driver_phone,
-            v.make,
-            v.model,
-            v.color,
-            v.plate_number
-        FROM ingest_db.bookings b
-        LEFT JOIN LATERAL (
-            SELECT ba.driver_id, ba.vehicle_id, ba.ride_status, ba.assignment_id
-            FROM transform_db.booking_assignments ba
-            WHERE ba.booking_id = b.booking_id
-            ORDER BY ba.assignment_id DESC
+    if booking_id is not None:
+        row = await pool.fetchrow(
+            """
+            SELECT
+                b.booking_id,
+                b.pickup_date,
+                b.pickup_time,
+                b.pickup_location,
+                b.dropoff_location,
+                ba.ride_status,
+                d.driver_name,
+                d.phone AS driver_phone,
+                v.make,
+                v.model,
+                v.color,
+                v.plate_number
+            FROM ingest_db.bookings b
+            LEFT JOIN LATERAL (
+                SELECT ba.driver_id, ba.vehicle_id, ba.ride_status, ba.assignment_id
+                FROM transform_db.booking_assignments ba
+                WHERE ba.booking_id = b.booking_id
+                ORDER BY ba.assignment_id DESC
+                LIMIT 1
+            ) ba ON TRUE
+            LEFT JOIN ingest_db.drivers d ON d.driver_id = ba.driver_id
+            LEFT JOIN ingest_db.vehicles v ON v.vehicle_id = ba.vehicle_id
+            WHERE b.customer_id = $1
+              AND b.booking_id = $2
             LIMIT 1
-        ) ba ON TRUE
-        LEFT JOIN ingest_db.drivers d ON d.driver_id = ba.driver_id
-        LEFT JOIN ingest_db.vehicles v ON v.vehicle_id = ba.vehicle_id
-        WHERE b.customer_id = $1
-          AND b.booking_id = $2
-        LIMIT 1
-        """,
-        customer_id,
-        booking_id,
-    )
+            """,
+            customer_id,
+            booking_id,
+        )
+    else:
+        row = await pool.fetchrow(
+            """
+            SELECT
+                b.booking_id,
+                b.pickup_date,
+                b.pickup_time,
+                b.pickup_location,
+                b.dropoff_location,
+                ba.ride_status,
+                d.driver_name,
+                d.phone AS driver_phone,
+                v.make,
+                v.model,
+                v.color,
+                v.plate_number
+            FROM ingest_db.bookings b
+            LEFT JOIN LATERAL (
+                SELECT ba.driver_id, ba.vehicle_id, ba.ride_status, ba.assignment_id
+                FROM transform_db.booking_assignments ba
+                WHERE ba.booking_id = b.booking_id
+                ORDER BY ba.assignment_id DESC
+                LIMIT 1
+            ) ba ON TRUE
+            LEFT JOIN ingest_db.drivers d ON d.driver_id = ba.driver_id
+            LEFT JOIN ingest_db.vehicles v ON v.vehicle_id = ba.vehicle_id
+            WHERE b.customer_id = $1
+              AND b.pickup_date >= CURRENT_DATE
+            ORDER BY b.pickup_date ASC, b.pickup_time ASC
+            LIMIT 1
+            """,
+            customer_id,
+        )
     if row:
         return dict(row)
     return None

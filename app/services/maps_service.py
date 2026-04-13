@@ -1,4 +1,5 @@
 import logging
+import math
 import httpx
 
 from app.config import settings
@@ -117,11 +118,7 @@ async def get_distance(origin: str, destination: str) -> tuple[float, int] | Non
 async def calculate_fare(
     pickup: str, dropoff: str, wait_time_mins: int = 0, journey_type: str | None = None
 ) -> FareEstimate | None:
-    """Calculate fare for route Base(A) -> Pickup(B) -> Dropoff(C).
-
-    Fare formula: ((total_miles - 2) * 2.2) + 11
-    Wait surcharge: floor(wait_time / 30) * 5
-    """
+    """Calculate fare using universal deadhead logic."""
     log.info("Calculating fare: base->%s->%s", pickup, dropoff)
 
     # A -> B (base to pickup)
@@ -140,21 +137,44 @@ async def calculate_fare(
     ride_miles, ride_mins = bc
     log.info("Pickup->Dropoff: %.2f miles, %d mins", ride_miles, ride_mins)
 
-    # C -> A (dropoff back to base)
-    ca = await get_distance(dropoff, BASE_ORIGIN)
-    dest_to_base_miles = ca[0] if ca else 0.0
-    dest_to_base_mins = ca[1] if ca else 0
-
-    total_miles = base_to_src_miles + ride_miles
+    # C -> A (dropoff back to base), except round trips end back at pickup
     if journey_type == "Round Trip":
-        base_fare = total_miles * 2.2 * 2
+        dest_to_base_miles = base_to_src_miles
+        dest_to_base_mins = base_to_src_mins
     else:
-        base_fare = max(((total_miles - 2) * 2.2) + 11, 11.0)
-    wait_surcharge = (wait_time_mins // 30) * 5.0
+        ca = await get_distance(dropoff, BASE_ORIGIN)
+        dest_to_base_miles = ca[0] if ca else 0.0
+        dest_to_base_mins = ca[1] if ca else 0
+
+    is_inbound = base_to_src_miles > dest_to_base_miles
+    charge_miles = ride_miles + (dest_to_base_miles if is_inbound else base_to_src_miles)
+    display_distance_miles = ride_miles
+    display_duration_mins = ride_mins
+
+    if journey_type == "Round Trip":
+        charge_miles += ride_miles
+        display_distance_miles = round(ride_miles * 2, 2)
+        display_duration_mins = ride_mins * 2
+
+    if charge_miles <= 2:
+        base_fare = 11.0
+    else:
+        base_fare = 11.0 + ((charge_miles - 2) * 2.40)
+
+    wait_surcharge = 0.0
+    if journey_type == "Round Trip":
+        wait_surcharge = round((max(wait_time_mins, 0) / 30.0) * 5.0, 2)
+
+    if journey_type == "Return":
+        base_fare *= 2
+        display_distance_miles = round(ride_miles * 2, 2)
+        display_duration_mins = ride_mins * 2
 
     return FareEstimate(
         distance_miles=ride_miles,
         duration_mins=ride_mins,
+        display_distance_miles=display_distance_miles,
+        display_duration_mins=display_duration_mins,
         base_fare=round(base_fare, 2),
         wait_surcharge=round(wait_surcharge, 2),
         total_fare=round(base_fare + wait_surcharge, 2),

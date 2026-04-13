@@ -12,6 +12,17 @@ _last_seen_id: int | None = None
 POLL_INTERVAL_SECONDS = 10
 
 
+def _as_whatsapp_destination(phone: str | None) -> str | None:
+    if not phone:
+        return None
+    normalized = phone.strip()
+    if not normalized:
+        return None
+    if normalized.startswith("whatsapp:"):
+        return normalized
+    return f"whatsapp:{normalized}"
+
+
 async def start_assignment_listener():
     """Poll transform_db.booking_assignments for new rows every N seconds.
 
@@ -57,7 +68,9 @@ async def _poll_new_assignments():
             ba.assignment_id, ba.booking_id,
             d.driver_name, d.phone AS driver_phone,
             v.make, v.model, v.color, v.plate_number,
-            b.customer_phone
+            b.customer_phone,
+            b.pickup_date, b.pickup_time,
+            b.pickup_location, b.dropoff_location, b.booking_notes
         FROM transform_db.booking_assignments ba
         JOIN ingest_db.drivers d ON d.driver_id = ba.driver_id
         JOIN ingest_db.vehicles v ON v.vehicle_id = ba.vehicle_id
@@ -73,6 +86,10 @@ async def _poll_new_assignments():
 
         message = (
             "Your driver has been assigned!\n\n"
+            f"Booking #{row['booking_id']}\n"
+            f"Pickup: {row['pickup_location']}\n"
+            f"Dropoff: {row['dropoff_location']}\n"
+            f"Pickup Date/Time: {row['pickup_date']} at {row['pickup_time']}\n\n"
             f"Driver: {row['driver_name']}\n"
             f"Vehicle: {row['color']} {row['make']} {row['model']}\n"
             f"Plate: {row['plate_number']}\n"
@@ -80,6 +97,22 @@ async def _poll_new_assignments():
         )
 
         await messaging_service.send(customer_phone, message)
+        driver_phone = _as_whatsapp_destination(row["driver_phone"])
+        if driver_phone:
+            variables = {
+                "1": str(row["booking_id"]),
+                "2": str(row["pickup_date"]),
+                "3": str(row["pickup_time"]),
+                "4": row["pickup_location"],
+                "5": row["dropoff_location"],
+                "6": str(row["customer_phone"]),
+                "7": row["booking_notes"] or "None",
+            }
+            await messaging_service.send_template(
+                driver_phone,
+                "HX60eb7e1b87a60b4df9bea37ad530f0cb",
+                variables,
+            )
         log.info(
             "Driver assignment notification sent to %s for booking %s",
             customer_phone,

@@ -9,12 +9,14 @@ class BookingExtraction(BaseModel):
     dropoff_location: str | None = None
     pickup_date: str | None = None           # raw string as spoken
     pickup_time: str | None = None           # raw string as spoken
+    return_journey_date: str | None = None
+    return_journey_time: str | None = None
     trip_type: str | None = None             # Airport / Local Trip
     flight_number: str | None = None
     flight_journey_type: str | None = None   # Arrival / Departure
     wait_time_mins: int | None = None
     number_of_luggages: int | None = None
-    passengers: int | None = None
+    booking_notes: str | None = None
 
 
 class BookingCreate(BaseModel):
@@ -49,6 +51,8 @@ class BookingCreate(BaseModel):
 class FareEstimate(BaseModel):
     distance_miles: float
     duration_mins: int
+    display_distance_miles: float | None = None
+    display_duration_mins: int | None = None
     base_fare: float
     wait_surcharge: float
     total_fare: float

@@ -10,6 +10,7 @@ from app.conversation.handler import process_message
 from app.conversation.session_store import cleanup_stale_sessions
 from app.database import close_pool, init_pool
 from app.listeners.assignment_listener import start_assignment_listener
+from app.routers.notifications import router as notifications_router
 from app.services import maps_service, transcription_service
 
 import os
@@ -54,6 +55,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Taxi Booking Bot", lifespan=lifespan)
+app.include_router(notifications_router)
 
 
 @app.post("/webhook")
